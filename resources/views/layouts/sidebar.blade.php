@@ -87,17 +87,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="user.html" class="nav-link ">
+                                <a href="{{ route('sm.index') }}" class="nav-link ">
                                     Social Media
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pricing.html" class="nav-link ">
+                                <a href="{{ route('cv.index') }}" class="nav-link ">
                                     CV
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="wizard.html" class="nav-link ">
+                                <a href="{{ route('seo.index') }}" class="nav-link ">
                                     SEO
                                 </a>
                             </li>

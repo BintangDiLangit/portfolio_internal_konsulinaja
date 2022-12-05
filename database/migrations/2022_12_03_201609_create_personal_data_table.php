@@ -27,6 +27,7 @@ class CreatePersonalDataTable extends Migration
             $table->integer('happy_clients')->nullable();
             $table->integer('winning_competitions')->nullable();
             $table->integer('project_done')->nullable();
+            $table->timestamps();
         });
     }
 

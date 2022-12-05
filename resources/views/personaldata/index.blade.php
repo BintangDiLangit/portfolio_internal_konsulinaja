@@ -46,14 +46,18 @@
                                         </g>
                                     </svg>
                                 </span>
-                                <input type="file" name="avatar" id="avatar" class="d-none">
+                                <input type="file" name="avatar" id="avatar" class="d-none"
+                                    accept="image/jpeg, image/png">
                             </label>
                             <img src="{{ isset($personalData->photo) ? $personalData->photo : 'https://via.placeholder.com/30x30' }}"
-                                alt="Profile picture" class="avatar-img" width="112" height="112">
+                                alt="Profile picture" class="avatar-img" id="avatar_preview" width="112" height="112">
                         </div>
 
-                        <h3 class="mb-0">Ellie Tucker</h3>
-                        <span class="small text-secondary fw-semibold">Assistant Manager</span>
+                        <h3 class="mb-0">
+                            {{ isset($personalData->name) ? $personalData->name : '[Nama Belum Di Set]' }}
+                        </h3>
+                        <span
+                            class="small text-secondary fw-semibold">{{ isset($personalData->job) ? $personalData->job : '[Job Title Belum Di Set]' }}</span>
                     </div>
 
                     <!-- Divider -->
@@ -71,6 +75,7 @@
                                 <path d="M2.25,23.25a9.75,9.75,0,0,1,19.5,0" fill="none" stroke="currentColor"
                                     stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
                             </svg>
+
                             Basic information
                         </a>
                     </li>
@@ -85,9 +90,11 @@
         </div>
 
         <div class="col">
-            <form novalidate>
-
+            <form action="{{ route('pd.update') }}" enctype="multipart/form-data" method="post">
+                @csrf
                 <!-- Card -->
+                <input type="text" name="avatar_hidden" id="avatar_hidden" class="d-none">
+                <input type="text" name="avatar_hidden_type" id="avatar_hidden_type" class="d-none">
                 <div class="card border-0 scroll-mt-3" id="basicInformationSection">
                     <div class="card-header">
                         <h2 class="h3 mb-0">Basic information</h2>
@@ -180,7 +187,7 @@
                         <div class="d-flex justify-content-end mt-5">
 
                             <!-- Button -->
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -195,8 +202,35 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
-        if ($('#avatar').val() != undefined || $('#avatar').val() != null) {
-            console.log($('#avatar').val());
+        // $('#avatar').blur(function() {
+        //     console.log('tes');
+        // if (!$(this).val()) {
+        //     $(this).parents('p').addClass('warning');
+        // }
+        // });
+        if (document.getElementById("avatar").files.length == 0) {
+            console.log("no files selected");
         }
+        // if ($('#avatar').val() != undefined || $('#avatar').val() != null) {
+        //     console.log($('#avatar').val());
+        // }
+
+        function checkFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#avatar_preview').attr('src', e.target.result);
+                    $('#avatar_hidden').val(e.target.result);
+                    $('#avatar_hidden_type').val(input.files[0].type);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#avatar").change(function() {
+            checkFile(this);
+        });
     </script>
 @endpush

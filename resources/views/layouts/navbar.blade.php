@@ -100,8 +100,7 @@
                 role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true"
                 aria-expanded="false" data-bs-offset="0,10">
                 <div class="avatar avatar-circle avatar-sm avatar-online">
-                    <img src="{{ isset($personalData->photo) ? $personalData->photo : 'https://via.placeholder.com/30x30' }}"
-                        alt="{{ 'konsulinaja_' . isset($personalData->name) ? $personalData->photo : 'company' }}"
+                    <img src="{{ env('APP_URL') . '/assets/images/profil.png' }}" alt="konsulinaja_company"
                         class="avatar-img" width="40" height="40">
                 </div>
             </a>
@@ -110,8 +109,7 @@
                 <div class="dropdown-item-text">
                     <div class="d-flex align-items-center">
                         <div class="avatar avatar-sm avatar-circle">
-                            <img src="{{ isset($personalData->photo) ? $personalData->photo : 'https://via.placeholder.com/30x30' }}"
-                                alt="{{ 'konsulinaja_' . isset($personalData->name) ? $personalData->photo : 'company' }}"
+                            <img src="{{ env('APP_URL') . '/assets/images/profil.png' }}" alt="konsulinaja_company"
                                 class="avatar-img" width="40" height="40">
                         </div>
                         <div class="flex-grow-1 ms-3">
